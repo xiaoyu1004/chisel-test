@@ -1,16 +1,18 @@
-project = myoperator
+project = ChiselTest
 
-RTL_DIR = gen_rtl_dir
+RTL_DIR = genarated_rtl_dir
+MAIN = counter.Main
 
 MILL = ./mill
 
+compile:
+	$(MILL) $(project).compile
+
 verilog:
-	$(MILL) $(project).run -td $(RTL_DIR)
+	$(MILL) -i $(project).runMain $(MAIN)
 
 test:
 	$(MILL) $(project).test
 
 clean:
-	rm -rf test_run_dir
-	rm -rf out
-	rm -rf $(RTL_DIR)
+	./mill clean
