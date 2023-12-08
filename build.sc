@@ -1,12 +1,15 @@
-import $ivy.`com.goyeau::mill-scalafix_mill0.10:0.3.1`
-import com.goyeau.mill.scalafix.ScalafixModule
-import mill._, scalalib._, scalafmt._
-
+// import Mill dependency
+import mill._
+import mill.define.Sources
+import mill.modules.Util
 import mill.scalalib.TestModule.ScalaTest
+import scalalib._
+// support BSP
+import mill.bsp._
 
-object ChiselTest extends SbtModule with ScalafixModule with ScalafmtModule { m =>
+object ChiselTest extends SbtModule { m =>
   override def millSourcePath = os.pwd
-  override def scalaVersion = "2.13.10"
+  override def scalaVersion = "2.13.12"
   override def scalacOptions = Seq(
     "-language:reflectiveCalls",
     "-deprecation",
@@ -14,15 +17,14 @@ object ChiselTest extends SbtModule with ScalafixModule with ScalafmtModule { m 
     "-Xcheckinit",
   )
   override def ivyDeps = Agg(
-    ivy"edu.berkeley.cs::chisel3:3.6.0",
+    ivy"org.chipsalliance::chisel:5.1.0",
   )
   override def scalacPluginIvyDeps = Agg(
-    ivy"edu.berkeley.cs:::chisel3-plugin:3.6.0",
+    ivy"org.chipsalliance:::chisel-plugin:5.1.0",
   )
-
-  object test extends Tests with ScalaTest {
+  object test extends SbtModuleTests with TestModule.ScalaTest {
     override def ivyDeps = m.ivyDeps() ++ Agg(
-      ivy"edu.berkeley.cs::chiseltest:0.6.0"
+      ivy"edu.berkeley.cs::chiseltest:5.0.2"
     )
   }
 }

@@ -1,7 +1,6 @@
 project = ChiselTest
 
-RTL_DIR = genarated_rtl_dir
-MAIN = counter.Main
+MAIN = counter.CounterMain
 
 MILL = ./mill
 
@@ -12,7 +11,7 @@ verilog:
 	$(MILL) -i $(project).runMain $(MAIN)
 
 test:
-	$(MILL) $(project).test
+	$(MILL) $(project).test 
 
 clean:
 	./mill clean
