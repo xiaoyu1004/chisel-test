@@ -1,6 +1,6 @@
 project = ChiselTest
 
-MAIN = counter.CounterMain
+MAIN = pc_control.PCcontrolTopMain
 
 MILL = ./mill
 
